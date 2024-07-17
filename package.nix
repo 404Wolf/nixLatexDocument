@@ -2,11 +2,10 @@
   pkgs,
   src,
   name,
+  tex ? "document.tex",
   texlive ? pkgs.texlive,
   texpkgs ? { },
-  builder ? "lualatex",
   lastModified ? 0,
-  document ? "document",
   ...
 }:
 let
@@ -19,13 +18,7 @@ pkgs.stdenvNoCC.mkDerivation {
     mkdir -p .cache/texmf-var
     export TEXMFHOME=.cache TEXMFVAR=.cache/texmf-var
     export SOURCE_DATE_EPOCH=${toString lastModified} # Ensure date is pure
-    ${tex}/bin/latexmk \
-      -interaction=nonstopmode \
-      -pdf \
-      -${builder} \
-      -pretex='\pdfvariable suppressoptionalinfo 512\relax' \
-      -jobname=document \
-      ${document}
+    ${tex}/bin/latexmk -pretex='\pdfvariable suppressoptionalinfo 512\relax' -jobname=${name} -pdflua ${tex}
   '';
   installPhase = ''
     mkdir -p $out
