@@ -1,27 +1,11 @@
 {
   description = "Nix latex packaging utilities";
 
-  inputs = {
-    flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-  };
-
   outputs =
+    { }:
     {
-      self,
-      nixpkgs,
-      flake-utils,
-      ...
-    }:
-    flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = import nixpkgs { inherit system; };
-      in
-      {
-        lib = {
-          buildLatexDocument = pkgs.callPackage ./package.nix;
-        };
-      }
-    );
+      lib = {
+        buildLatexDocument = pkgs: pkgs.callPackage ./package.nix;
+      };
+    };
 }
