@@ -7,18 +7,8 @@
   };
 
   outputs =
+    { }:
     {
-      self,
-      nixpkgs,
-      flake-utils,
-    }:
-    flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = import nixpkgs { inherit system; };
-      in
-      {
-        buildLatexDocument = import ./package.nix;
-      }
-    );
+      buildLatexDocument = import ./package.nix;
+    };
 }
