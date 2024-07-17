@@ -18,7 +18,7 @@
         pkgs = import nixpkgs { inherit system; };
       in
       {
-        buildLatexDocument = pkgs.callPackage ./package.nix { };
+        buildLatexDocument = import ./package.nix;
       }
     );
 }
