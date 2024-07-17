@@ -23,7 +23,7 @@ pkgs.stdenvNoCC.mkDerivation {
       -${builder} \
       -pretex='\pdfvariable suppressoptionalinfo 512\relax' \
       -jobname=document \
-      ${./src/document.tex}
+      ${src}
   '';
   installPhase = ''
     mkdir -p $out
