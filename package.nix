@@ -12,7 +12,8 @@ let
   tex = texlive.combine { inherit (pkgs.texlive) scheme-minimal latex-bin latexmk; } // texpkgs;
 in
 pkgs.stdenvNoCC.mkDerivation {
-  inherit src name;
+  inherit name;
+  dontUnpack = true;
   buildPhase = ''
     mkdir -p .cache/texmf-var
     export TEXMFHOME=.cache TEXMFVAR=.cache/texmf-var
