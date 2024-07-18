@@ -23,6 +23,9 @@
         lib = {
           buildLatexDocument = pkgs.callPackage ./src/package.nix;
         };
+        misc = {
+          inherit developScript;
+        };
         devShells.default = pkgs.mkShell { shellHook = ''${developScript}/bin/develop.sh && exit''; };
       }
     );
