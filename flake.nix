@@ -17,7 +17,7 @@
       system:
       let
         pkgs = import nixpkgs { inherit system; };
-        developScript = pkgs.callPackage ./src/develop.nix;
+        developScript = pkgs.callPackage ./src/develop.nix { inherit pkgs; };
       in
       {
         lib = {
