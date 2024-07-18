@@ -17,10 +17,14 @@
       system:
       let
         pkgs = import nixpkgs { inherit system; };
+          developScript = pkgs.callPackage ./lib/develop.nix;
       in
       {
         lib = {
-          buildLatexDocument = pkgs.callPackage ./package.nix;
+          buildLatexDocument = pkgs.callPackage ./lib/package.nix;
+        };
+        devShells.default = pkgs.mkShell {
+          shellHook = "${developScript}/bin/develop.sh && exit";
         };
       }
     );
