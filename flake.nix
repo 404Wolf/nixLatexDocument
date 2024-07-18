@@ -23,7 +23,7 @@
         lib = {
           buildLatexDocument = pkgs.callPackage ./src/package.nix;
         };
-        devShells.default = pkgs.mkShell { shellHook = "${developScript}/bin/develop.sh && exit"; };
+        devShells.default = pkgs.mkShell { shellHook = ''${developScript}/bin/develop.sh && exit''; };
       }
     );
 }
