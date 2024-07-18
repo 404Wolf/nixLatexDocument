@@ -1,21 +1,36 @@
-# A `buildLatexDocument` for Nix!
+# Latex document builder for Nix
 
 ```nix
-latex-utils.buildLatexDocument {
-  inherit pkgs;
-  name = "somelatexdocument";
-  src = ./src/document.tex;
+buildLatexDocument {
+  inherit name;
+  src = ./.;
+  document = "document.tex";
+  lastModified = self.lastModified;
+  texpkgs = {
+    inherit (pkgs.texlive)
+      fancyhdr
+      soulpos
+      preprint
+      ;
+  };
 };
 ```
 
-This function will build a LaTeX document from the given `src` file. It will
-automatically include all the necessary packages and dependencies, and will
-output a PDF file with the same name as the `name` attribute.
+This function will build a LaTeX document using the given `src` directory and specified
+document. It will automatically include all the necessary packages and dependencies, 
+and will output a PDF file with the same name as the `name` attribute.
 
 ```
 result
-└── test.pdf
+└── document.pdf
 ```
+
+# Latex Developer Environment
+
+`nix develop` places you into a devshell where a nix build is automatically run
+to build the LaTeX document every time any `tex` file changes. You can use a
+PDF viewer that supports reloading (like Chromium or Firefox) to see the changes
+in real time.
 
 ## Credit
 

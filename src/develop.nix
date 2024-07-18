@@ -2,7 +2,7 @@
 pkgs.writeShellScriptBin "develop.sh" ''
   function build {
     nix build --out-link tmp
-    cp tmp/share/resume.pdf resume.pdf
+    cp tmp/share/*.pdf tmp.pdf
     rm -r tmp
   }
   export -f build
